@@ -4,4 +4,4 @@
 * Completed All CRUD part.
 
 # Day 2
-* Auth part
+* Auth part - Sign up
