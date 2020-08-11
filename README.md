@@ -5,3 +5,6 @@
 
 # Day 2
 * Auth part - Sign up
+
+# Day 3
+ * Auth - Login
