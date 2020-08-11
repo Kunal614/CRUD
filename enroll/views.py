@@ -1,15 +1,20 @@
 from django.shortcuts import render , HttpResponseRedirect
 
 # Create your views here.
-from .forms import studentRegister , SignupForm
+from .forms import studentRegister , SignupForm , AuthForm
+
 from django.contrib import messages
 
 from .models import user
 
+# from django.contrib.auth.forms import AuthenticationForm
+
+
+from django.contrib.auth import authenticate , login as dj_login , logout
 
 
 
-
+#signup
 def sign_up(request):
     
     if request.method == 'POST':
@@ -22,9 +27,7 @@ def sign_up(request):
         fm = SignupForm()        
 
 
-    
-
-    return render(request , 'enroll/signup.html',{'form':fm})
+    return render(request , 'enroll/signup_in.html',{'form':fm})
 
 
 
@@ -57,6 +60,7 @@ def delete_data(request , id):
         de.delete()
         return HttpResponseRedirect('/')
 
+#update
 def update_data(request , id):
 
     if request.method == 'POST':
@@ -72,3 +76,41 @@ def update_data(request , id):
         'form':fm
     }
     return render(request , 'enroll/update.html' , context)
+
+
+#login
+def login(request):
+    if not request.user.is_authenticated:
+        if request.method == "POST":
+            # fm = AuthenticationForm(request=request , data=request.POST)
+            fm = AuthForm(request=request , data=request.POST)
+
+            if fm.is_valid():
+                uname = fm.cleaned_data['username']
+                upass = fm.cleaned_data['password']
+                user = authenticate(username=uname , password=upass)
+                if user is not None:
+                    dj_login(request, user)
+                    messages.success(request , 'Login Successfully !! ')
+                    return HttpResponseRedirect('/profile/')
+            
+        else:
+            # fm = AuthenticationForm()
+            fm = AuthForm()
+
+        return render(request , 'enroll/signup_in.html',{'form1':fm})
+    else:
+        return HttpResponseRedirect('/profile/')
+
+#profile
+
+def user_profile(request):
+    if request.user.is_authenticated:
+        return render(request , 'enroll/profile.html', {'name':request.user}) 
+    else:
+        return HttpResponseRedirect('/login/')    
+
+
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/login/')

@@ -1,0 +1,44 @@
+{% extends 'enroll/base.html'%}{% block content%}
+<style>
+    .success {
+        color: red;
+    }
+    
+    .error {
+        color: red;
+    }
+    
+    .form-control {
+        background-color: #111;
+    }
+</style>
+<div class="row">
+    <div class=" col-sm-4">
+        <h1 class="text-center alert alert-info" style="font-weight: bold; font-size: 20px;">
+            Sign Up
+        </h1>
+        <form action="" method="POST" novalidate>
+            {%csrf_token%}{% if form1.non_field_errors%} {% for error in form1.non_field_errors %}
+            <p class="error">{{error}}</p> {%endfor%}{%endif%} {% for fm in form%} {{fm.label_tag}}{{fm}}<small class="error">{{fm.errors|striptags}} </small><br> {% endfor %}
+            <br>
+            <input type="submit" class="btn btn-success" value="Sign Up">
+            <a href="{%url 'Login'%}" class="btn btn-primary">Have an Account</a>
+        </form>
+        {% if messages %} {% for message in messages %}
+        <small {% if message.tags %}class="{{message.tags}}" {%endif%}>{{message}}</small> {% endfor%} {%endif%}
+    </div>
+    <div class="col-sm-4 offset-4">
+        <h1 class="text-center alert alert-info" style="font-weight: bold; font-size: 20px;">
+            Sign In
+        </h1>
+        <form method="POST" action="" novalidate>
+            {% csrf_token %}{% if form1.non_field_errors%} {% for error in form1.non_field_errors %}
+            <p class="error">{{error}}</p> {%endfor%}{%endif%} {% for fm in form1 %} {{fm.label_tag}}{{fm}}
+            <small class="error">{{fm.errors|striptags}}</small><br><br> {%endfor%}
+            <input type="submit" class="btn btn-success" value="Login">
+            <a href="{%url 'Signup'%}" class="btn btn-primary">New User</a>
+        </form>
+
+    </div>
+</div>
+{%endblock%}
