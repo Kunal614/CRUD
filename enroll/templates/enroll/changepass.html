@@ -1,0 +1,32 @@
+{% extends 'enroll/base.html'%}{%block content%}
+<style>
+    .error {
+        color: red;
+    }
+    
+    .form-control {
+        background-color: #111;
+        color: aliceblue;
+    }
+</style>
+<h1 class="text-center alert alert-warning">Chnage password</h1>
+<div class='row'>
+    <div class='col-sm-6 offset-3'>
+        <form action="" method="POST" novalidate>
+            <br><br> {%csrf_token%}{% if form.non_field_errors%}{% for error in form.non_field_errors %}
+            <p class="error">{{error}}</p> {%endfor%}{%endif%} {% for fm in form%} {{fm.label_tag}}{{fm}}<small class='error'>{{fm.errors|striptags}}</small><br> <br>{%endfor%}
+            <input type="submit" value="Save" class="btn btn-success">
+
+        </form>
+
+
+
+    </div>
+    <div class='col-sm-2 offset-1'>
+        <a href="{%url 'profile'%}" class="btn btn-secondary">Profile
+        </a>
+        <a href="{%url 'logout'%}" class="btn btn-danger">Logout
+            </a>
+    </div>
+</div>
+{%endblock%}

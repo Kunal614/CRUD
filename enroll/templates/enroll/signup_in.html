@@ -10,6 +10,7 @@
     
     .form-control {
         background-color: #111;
+        color: aliceblue;
     }
 </style>
 <div class="row">
@@ -18,7 +19,7 @@
             Sign Up
         </h1>
         <form action="" method="POST" novalidate>
-            {%csrf_token%}{% if form1.non_field_errors%} {% for error in form1.non_field_errors %}
+            {%csrf_token%}{% if form.non_field_errors%} {% for error in form.non_field_errors %}
             <p class="error">{{error}}</p> {%endfor%}{%endif%} {% for fm in form%} {{fm.label_tag}}{{fm}}<small class="error">{{fm.errors|striptags}} </small><br> {% endfor %}
             <br>
             <input type="submit" class="btn btn-success" value="Sign Up">

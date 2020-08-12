@@ -1,16 +1,16 @@
 from django.shortcuts import render , HttpResponseRedirect
 
 # Create your views here.
-from .forms import studentRegister , SignupForm , AuthForm
+from .forms import studentRegister , SignupForm , AuthForm , Changepass , UserForm
 
 from django.contrib import messages
 
 from .models import user
 
-# from django.contrib.auth.forms import AuthenticationForm
+# from django.contrib.auth.forms import UserChangeForm
 
 
-from django.contrib.auth import authenticate , login as dj_login , logout
+from django.contrib.auth import authenticate , login as dj_login , logout , update_session_auth_hash
 
 
 
@@ -106,7 +106,14 @@ def login(request):
 
 def user_profile(request):
     if request.user.is_authenticated:
-        return render(request , 'enroll/profile.html', {'name':request.user}) 
+        if request.method == 'POST':
+            fm = UserForm(request.POST , instance=request.user)
+            if fm.is_valid():
+                messages.success(request , "Profile Updated")
+                fm.save()
+        else:
+            fm = UserForm(instance=request.user)
+        return render(request , 'enroll/profile.html', {'name':request.user , 'form':fm}) 
     else:
         return HttpResponseRedirect('/login/')    
 
@@ -114,3 +121,21 @@ def user_profile(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/login/')
+
+
+def change_pass(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            fm = Changepass(user=request.user , data=request.POST)
+            if fm.is_valid():
+                fm.save()
+                update_session_auth_hash(request , fm.user)
+                return HttpResponseRedirect('/profile/')
+        else:        
+            fm = Changepass(user = request.user)
+    else:
+       return HttpResponseRedirect('/login/')        
+
+    return render(request , 'enroll/changepass.html', {'form':fm})
+
+
