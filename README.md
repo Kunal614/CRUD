@@ -14,3 +14,6 @@
  
 # Day 5
  * Setup All
+
+# Day 6
+ * Deployment
