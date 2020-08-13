@@ -6,6 +6,6 @@ from .models import user
 
 @admin.register(user)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id' , 'name'  ,'email','password')
+    list_display = ('id' , 'name'  ,'email','Class', 'Comments')
     
 

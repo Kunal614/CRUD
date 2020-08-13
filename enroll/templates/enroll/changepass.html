@@ -5,8 +5,12 @@
     }
     
     .form-control {
-        background-color: #111;
+        background-color: grey;
         color: aliceblue;
+    }
+    
+    label {
+        color: azure;
     }
 </style>
 <h1 class="text-center alert alert-warning">Chnage password</h1>
@@ -23,6 +27,7 @@
 
     </div>
     <div class='col-sm-2 offset-1'>
+
         <a href="{%url 'profile'%}" class="btn btn-secondary">Profile
         </a>
         <a href="{%url 'logout'%}" class="btn btn-danger">Logout

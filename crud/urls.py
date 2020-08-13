@@ -15,15 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from enroll.views import add_show , delete_data , update_data , sign_up , login , user_profile , user_logout , change_pass
+from enroll.views import add_show , delete_data , update_data , sign_up , login , user_profile , user_logout , change_pass , home
 
 urlpatterns = [
-    path('signup/', sign_up, name="Signup"),
+    path('Signup', sign_up, name="Signup"),
     path('login/', login, name="Login"),
     path('profile/', user_profile, name="profile"),
     path('logout/', user_logout, name="logout"),
     path('changepass/', change_pass, name="Changepass"),
-    path('', add_show, name="AddShow"),
+    path('crud/<int:id>', add_show, name="AddShow"),
+    path('', home, name="Home"),
     path('admin/', admin.site.urls),
     path('delete/<int:id>/', delete_data,name="Delete_Data"),
     path('update/<int:id>/', update_data,name="Update_Data"),

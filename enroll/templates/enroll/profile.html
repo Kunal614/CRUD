@@ -9,16 +9,27 @@
     }
     
     .form-control {
-        background-color: #111;
+        background-color: grey;
         color: aliceblue;
     }
+    
+    label {
+        color: azure;
+    }
+    
+    h1 {
+        font-family: serif;
+        font-style: italic;
+        color: red;
+        font-size: 35px;
+    }
 </style>
-<h1 class="text-center alert alert-warning">Profile page</h1>
 {% if messages %} {% for message in messages %}
 <small {% if message.tags %}class="{{message.tags}}" {%endif%}>{{message}}</small> {% endfor%} {%endif%}
-
+<h1>Faculty Profile</h1>
 <div class='row'>
     <div class='col-sm-3'>
+        <span><br></span>
         <form action="" method="POST">
             {%csrf_token%} {% if form.non_field_errors%} {% for error in form.non_field_errors %}
             <p class="error">{{error}}</p> {%endfor%}{%endif%} {% for fm in form%} {{fm.label_tag}}{{fm}}<small class="error">{{fm.errors|striptags}} </small><br> {% endfor %}
@@ -26,6 +37,8 @@
         </form>
     </div>
     <div class='col-sm-4 offset-5'>
+        <span><br></span>
+        <a href="{% url 'AddShow' request.user.id  %}" class="btn btn-primary">CRUD</a>
         <a href="{% url 'Changepass' %}" class="btn btn-danger">Change Password</a>
         <a href="{% url 'logout' %}" class='btn btn-secondary'>Logout</a> {%endblock%}
 

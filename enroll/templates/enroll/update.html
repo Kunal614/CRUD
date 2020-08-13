@@ -1,12 +1,31 @@
 {% extends 'enroll/base.html'%}{%block content%}
+<style>
+    .form-control {
+        background-color: grey;
+        color: aliceblue;
+    }
+    
+    label {
+        color: azure;
+    }
+</style>
 <div class="row">
-    <div class="col-sm-8 offset-2">
+    <div class="col-sm-5">
+        <span><br></span>
         <h4 class="alert alert-info">Update Student Information</h4>
         <form method="POST" action="">
             {% csrf_token%} {{form.as_p}}
             <input type="submit" class="btn btn-success" value="update">
-            <a href="{% url 'AddShow'%}" class="btn btn-primary">Home</a>
+
         </form>
+    </div>
+    <div class='col-sm-3 offset-3'>
+        <span><br></span>
+
+        <a href="{% url 'AddShow' request.user.id%}" class="btn btn-primary">CRUD</a>
+        <a href="{% url 'profile' %}" class="btn btn-primary">Profile</a>
+        <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+
     </div>
 </div>
 {%endblock%}

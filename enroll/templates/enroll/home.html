@@ -1,0 +1,54 @@
+{%extends 'enroll/base.html'%}{% block content%}
+<style>
+    body {
+        background-color: #111;
+    }
+    
+    .text {
+        font-size: large;
+        font-family: serif;
+        font-style: italic;
+        color: aliceblue;
+    }
+    
+    #user {
+        position: relative;
+        top: 2px;
+    }
+    
+    h3 {
+        color: antiquewhite;
+        font-style: italic;
+        font-family: serif;
+    }
+</style>
+<span><br></span>
+<h3>{% if request.user.is_authenticated%} <a href="{%url 'profile' %}"><span style="color:blue;font-family: serif;font-size: 20px;">{{request.user|title}}</span>{%endif%}</a></h3>
+<h1 class="text-center alert alert-info">
+    About Project
+
+</h1>
+<div class="row">
+    <div class='col-sm-6 offset-3'>
+        <p class='text'>
+            <br> This project is Explaining Crud Operations. That is : create, read, update and delete.<br> This also contain the Auth part from which user can login and do its CRUD job.
+        </p>
+    </div>
+
+</div>
+<div class="row">
+    <div class='col-sm-2'>
+        {% if not request.user.is_authenticated%}
+        <a href='{%url "Login" %}' class='btn btn-success btn-sm'>Login</a>
+        <a href="{%url 'Signup'%}" class='btn btn-secondary btn-sm'>Signup</a> {%else%}
+
+        <a href="{%url 'logout'%}" class="btn btn-danger btn-sm">Logout</a>
+        <a href="{%url 'AddShow' request.user.id%}" class="btn btn-success btn-sm">CRUD</a> {%endif%}
+
+
+    </div>
+
+</div>
+
+
+{%endblock%}

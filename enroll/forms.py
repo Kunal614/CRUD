@@ -11,13 +11,15 @@ from django.core import validators
 
 
 class studentRegister(forms.ModelForm):
-    password = forms.CharField(max_length=32,  widget=forms.PasswordInput(render_value=True , attrs={'class':'form-control'})) 
     class Meta:
         model = user
-        fields = ['name' , 'email' , 'password']
+        fields = ['name' , 'email' , 'Class' , 'Comments']
+        labels={'Comments':'Remarks'}
         widgets ={
             'name':forms.TextInput(attrs={'class':'form-control'}),
             'email':forms.TextInput(attrs={'class':'form-control'}),
+            'Class':forms.TextInput(attrs={'class':'form-control'}),
+            'Comments':forms.TextInput(attrs={'class':'form-control'}),
             
         }
 
@@ -50,7 +52,7 @@ class UserForm(UserChangeForm):
     class Meta:
         model = User
         fields = ['username' , 'first_name' , 'last_name','email' ,'date_joined' , 'last_login']
-        labels = {'email':'Email'}
+        labels = {'email':'Email','username':'Username'}
         widgets ={
             'username':forms.TextInput(attrs={'class':'form-control'}),
             'email':forms.TextInput(attrs={'class':'form-control'}),

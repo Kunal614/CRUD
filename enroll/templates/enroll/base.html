@@ -7,11 +7,14 @@
     <style>
         #head {
             top: 0px;
-            color: black;
+            color: red;
+            left: 0px;
+            font-family: serif;
+            font-style: italic;
         }
         
         body {
-            background-color: azure;
+            background-color: #111;
         }
     </style>
 
@@ -21,8 +24,10 @@
 
     <div class="container mt-5">
         <h2 class="text-center" id="head">
-            Function based View ModelForm CRUD Project
+            <a href="{%url 'Home'%}" class='btn btn-warning btn-sm'>Home</a> CRUD Project
+
         </h2>
+
         {% block content %}{% endblock content %}
     </div>
     <script src="{% static 'enroll/js/jquery.js' %}"></script>
