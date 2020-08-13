@@ -17,4 +17,4 @@
 
 # Day 6
  * Deployment
- link - https://crud-auth-app.herokuapp.com/
+ * link - https://crud-auth-app.herokuapp.com/
