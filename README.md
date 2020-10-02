@@ -18,3 +18,6 @@
 # Day 6
  * Deployment
  * link - https://crud-auth-app.herokuapp.com/
+# Day 7 
+
+Added more functionality
